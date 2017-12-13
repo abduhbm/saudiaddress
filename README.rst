@@ -9,31 +9,38 @@ Basic Usage of saudiaddress
 .. code-block:: pycon
 
     >>> from saudiaddress.api import NationalAddress
-
-    >>> # initialize
-    >>> DELAY_IN_SEC = 5
     >>> api_key = os.environ.get('NATIONAL_ADDRESS_API_KEY')
     >>> na = NationalAddress(key=api_key)
 
-    >>> # to get a national address from lat/long
+
+Reverse geocoding of coordinates to a national address
+
+.. code-block:: pycon
+
     >>> addresses = na.get_address(lat=26.318922, long=50.228043, language='E')
     >>> print("address:", addresses.records[0])
     address: 6418 al kurnaysh road - al kurnaish AL KHUBAR 34412 - 3618
 
-    >>> time.sleep(DELAY_IN_SEC)
-    >>> # to bulk search a list of (building_no, post_code, additional_no)
+Bulk search a list of (building number, post code, additional number)
+
+.. code-block:: pycon
+
     >>> for address in na.bulk_search([(3468, 23955, 7487), (6418, 34412, 3618)], page=1).records:
     >>>     print(address)
     3468  - king abdullah university of science and technology THUWAL 23955 - 7487
     6418 al kurnaysh road - al kurnaish AL KHUBAR 34412 - 3618
 
-    >>> time.sleep(DELAY_IN_SEC)
-    >>> # to verify an address
+Verify a national address
+
+.. code-block:: pycon
+
     >>> print("the address is", na.verify_address(6418, 34412, 3618))
     the address is True
 
-    >>> time.sleep(DELAY_IN_SEC)
-    >>> # free text search for an address
+Free text search for a national address
+
+.. code-block:: pycon
+
     >>> addresses = na.free_text_search('2292  - king abdullah university of science and technology')
     >>> print("count:", addresses.count)
     >>> address = addresses.records[0]
@@ -42,8 +49,10 @@ Basic Usage of saudiaddress
     count: 1
     lat=22.324697064547, long=39.0942996143403, city=THUWAL, region=Makkah
 
-    >>> time.sleep(DELAY_IN_SEC)
-    >>> # search nearest services
+Search nearest services
+
+.. code-block:: pycon
+
     >>> addresses = na.nearest_poi(lat=22.32, long=39.09, radius=2)
     >>> for address in addresses.records:
     >>>     print('title:%s' % address.Title)
@@ -53,14 +62,18 @@ Basic Usage of saudiaddress
     title:sabb bank
     address: 7126  - king abdullah university of science and technology THUWAL 23955 - 3451
 
-    >>> time.sleep(DELAY_IN_SEC)
-    >>> # search services based on fixed parameters
+Search services based on fixed parameters
+
+.. code-block:: pycon
+
     >>> addresses = na.fixed_search(city_name='THUWAL', post_code=23955, additional_number=7487)
     >>> print(addresses.records[0])
     3468  - king abdullah university of science and technology THUWAL 23955 - 7487
 
-    >>> time.sleep(DELAY_IN_SEC)
-    >>> # find availability of services by providing details in free text
+Find availability of services by providing details in free text
+
+.. code-block:: pycon
+
     >>> addresses = na.poi_free_text_search('sabb atm', language='E')
     >>> print('total SABB ATMs found: %d' % addresses.count)
     >>> print(addresses.records)
@@ -71,8 +84,11 @@ Basic Usage of saudiaddress
     2946 al amir muhammad ibn abdul aziz branch rd - al ulaya AR RIYADH 12213 - 7929
     2332 no 92 - al ulaya AR RIYADH 12214 - 9330
 
-    >>> time.sleep(DELAY_IN_SEC)
-    >>> # get a list of regions
+Get a list of regions
+
+.. code-block:: pycon
+
+
     >>> regions = na.get_regions(language='A')
     >>> for region in regions[:5]:
     >>>     print(region)
@@ -82,8 +98,10 @@ Basic Usage of saudiaddress
     Region (ID=1, Name= الرياض)
     Region (ID=4, Name= القصيم)
 
-    >>> time.sleep(DELAY_IN_SEC)
-    >>> # get a list of cities in a region
+Get a list of cities within a region
+
+.. code-block:: pycon
+
     >>> cities = na.get_cities(region_id=1)
     >>> for city in cities[:5]:
     >>>     print(city)
@@ -93,8 +111,10 @@ Basic Usage of saudiaddress
     City (ID=1061, Name=AL KHARJ)
     City (ID=24, Name=AL MAJMA'AH)
 
-    >>> time.sleep(DELAY_IN_SEC)
-    >>> # get a list of districts in a city
+Get a list of districts in a city
+
+.. code-block:: pycon
+
     >>> districts = na.get_districts(city_id=3)
     >>> for district in districts[:5]:
     >>>     print(district)
@@ -104,8 +124,10 @@ Basic Usage of saudiaddress
     District (ID=10100003116, Name=ad dubiyah)
     District (ID=10100003076, Name=ad duraihimiyah)
 
-    >>> time.sleep(DELAY_IN_SEC)
-    >>> # get a list of service categories
+Get a list of service categories
+
+.. code-block:: pycon
+
     >>> categories = na.get_categories()
     >>> for category in categories[:5]:
     >>>     print(category)
@@ -115,8 +137,10 @@ Basic Usage of saudiaddress
     Category (ID=103, Name=Cultural Sites)
     Category (ID=104, Name=Diplomatic)
 
-    >>> time.sleep(DELAY_IN_SEC)
-    >>> # to get a list of sub-service categories
+Get a list of sub-service categories
+
+.. code-block:: pycon
+
     >>> sub_categories = na.get_subcategories(service_category_id=101)
     >>> for sub_category in sub_categories[:5]:
     >>>     print(sub_category)
@@ -126,8 +150,11 @@ Basic Usage of saudiaddress
     Sub-Category (ID=10104, Name=Auto Spare Parts)
     Sub-Category (ID=10105, Name=Auto Workshop)
 
-    >>> time.sleep(DELAY_IN_SEC)
-    >>> # find all ATMs in district ad dirah in AR RIYADH city
+Fina all ATMs in district 'ad dirah' in Riyadh city
+
+.. code-block:: pycon
+
+
     >>> services = na.poi_fixed_search('atm', district_name='ad dirah', city_name='AR RIYADH', page=1)
     >>> print("total:", services.count)
     >>> for service in services.records:
