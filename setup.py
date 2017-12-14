@@ -6,7 +6,7 @@ import os
 import sys
 from shutil import rmtree
 
-from setuptools import setup, Command
+from setuptools import setup, Command, find_packages
 
 NAME = 'saudiaddress'
 DESCRIPTION = 'A simple Python wrapper for the Saudi National Address APIs.'
@@ -68,7 +68,7 @@ setup(
     author=AUTHOR,
     # author_email=EMAIL,
     url=URL,
-    py_modules=['saudiaddress'],
+    packages=find_packages(exclude=['tests']),
     install_requires=REQUIRED,
     include_package_data=True,
     license='MIT',
