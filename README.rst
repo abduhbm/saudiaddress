@@ -171,5 +171,9 @@ Fina all ATMs in district 'ad dirah' in Riyadh city
     riyadh atm 7172 al batha - ad dirah AR RIYADH 12633 - 3386
 
 
+Installation
+------------
+
+    $ pip install saudiaddress
 
 
