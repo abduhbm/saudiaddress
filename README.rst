@@ -44,8 +44,7 @@ Free text search for a national address
     >>> addresses = na.free_text_search('2292  - king abdullah university of science and technology')
     >>> print("count:", addresses.count)
     >>> address = addresses.records[0]
-    >>> print('lat={lat}, long={long}, city={city}, region={region}'.format(lat=address.Latitude, long=address.Longitude,
-    >>>                                                                     city=address.City, region=address.RegionName))
+    >>> print('lat={lat}, long={long}, city={city}, region={region}'.format(lat=address.Latitude, long=address.Longitude, city=address.City, region=address.RegionName))
     count: 1
     lat=22.324697064547, long=39.0942996143403, city=THUWAL, region=Makkah
 
