@@ -69,8 +69,8 @@ setup(
     # author_email=EMAIL,
     url=URL,
     packages=find_packages(exclude=['tests']),
-    install_requires=REQUIRED,
     include_package_data=True,
+    install_requires=REQUIRED,
     license='MIT',
     keywords='Saudi National Address',
     classifiers=[
